@@ -34,7 +34,7 @@ require('lazy').setup({
   'tpope/vim-rhubarb',
 
   -- Detect tabstop and shiftwidth automatically
-  'tpope/vim-sleuth',
+  -- 'tpope/vim-sleuth',
 
   -- NOTE: This is where your plugins related to LSP can be installed.
   --  The configuration is done below. Search for lspconfig to find it below.
@@ -265,6 +265,19 @@ vim.o.clipboard = 'unnamedplus'
 
 -- Enable break indent
 vim.o.breakindent = true
+
+-- Set tabstop to 2 spaces
+vim.o.tabstop = 2
+
+-- Set shift width to 2 spaces
+vim.o.shiftwidth = 2
+
+-- Converts tabs to spaces
+vim.o.expandtab = true
+
+-- Set these options globally for all file types
+vim.o.smartindent = true
+vim.o.autoindent = true
 
 -- Save undo history
 vim.o.undofile = true
