@@ -317,7 +317,7 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 
 -- My Remaps
 
-vim.keymap.set('n', '<leader>pv', vim.cmd.Ex, { desc = '[P]roject [v]iew' })
+vim.keymap.set('n', '<leader>pv', vim.cmd.Ex, { desc = '[P]roject [V]iew' })
 
 
 -- [[ Highlight on yank ]]
