@@ -4,6 +4,12 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
+-- disable netrw at the very start of your init.lua
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
+-- set termguicolors to enable highlight groups
+vim.opt.termguicolors = true
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    https://github.com/folke/lazy.nvim
 --    `:help lazy.nvim.txt` for more info
@@ -54,7 +60,7 @@ require('lazy').setup({
       'folke/neodev.nvim',
     },
   },
-
+  { 'nvim-tree/nvim-tree.lua' },
   {
     -- Autocompletion
     'hrsh7th/nvim-cmp',
@@ -90,7 +96,7 @@ require('lazy').setup({
     },
   },
   -- Useful plugin to show you pending keybinds.
-  { 'folke/which-key.nvim', opts = {} },
+  { 'folke/which-key.nvim',   opts = {} },
   {
     -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
@@ -165,8 +171,9 @@ require('lazy').setup({
       end,
     },
   },
+
   --rose-pine theme
-  { 'rose-pine/neovim',     name = 'rose-pine' },
+  { 'rose-pine/neovim',      name = 'rose-pine' },
 
   {
     -- Set lualine as statusline
@@ -317,7 +324,8 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 
 -- My Remaps
 
-vim.keymap.set('n', '<leader>pv', vim.cmd.Ex, { desc = '[P]roject [V]iew' })
+vim.keymap.set('n', '<leader>f', ':NvimTreeToggle<cr>', { desc = 'Toggle Filetree' })
+-- vim.keymap.set('n', '<leader>pv', vim.cmd.Ex, { desc = '[P]roject [V]iew' }) commenting out while using nvim-tree
 
 
 -- [[ Highlight on yank ]]
@@ -649,6 +657,20 @@ cmp.setup {
     { name = 'luasnip' },
     { name = 'path' },
   },
+  require("nvim-tree").setup({
+    sort = {
+      sorter = "case_sensitive",
+    },
+    view = {
+      width = 30,
+    },
+    renderer = {
+      group_empty = true,
+    },
+    filters = {
+      dotfiles = true,
+    },
+  })
 }
 
 -- The line beneath this is called `modeline`. See `:help modeline`
