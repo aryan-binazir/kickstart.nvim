@@ -256,6 +256,9 @@ vim.o.hlsearch = false
 -- Set colour rose-pine
 vim.cmd('colorscheme rose-pine')
 
+-- Set jade files to be viewed as pug files by treesitter
+vim.cmd [[ autocmd BufRead,BufNewFile *.jade set filetype=pug ]]
+
 -- Make line numbers relative
 vim.wo.relativenumber = true
 
@@ -425,7 +428,7 @@ vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = 
 vim.defer_fn(function()
   require('nvim-treesitter.configs').setup {
     -- Add languages to be installed here that you want installed for treesitter
-    ensure_installed = { 'go', 'lua', 'python', 'tsx', 'javascript', 'typescript', 'bash' },
+    ensure_installed = { 'go', 'lua', 'python', 'tsx', 'javascript', 'typescript', 'bash', 'pug' },
 
     -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
     auto_install = true,
