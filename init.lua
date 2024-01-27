@@ -173,11 +173,14 @@ require('lazy').setup({
   },
 
   --rose-pine theme
-  { 'rose-pine/neovim',      name = 'rose-pine' },
+  -- { 'rose-pine/neovim',      name = 'rose-pine' },
+  -- Catppuccin theme
+  { "catppuccin/nvim",       name = "catppuccin", priority = 1000 },
 
   {
     -- Set lualine as statusline
     'nvim-lualine/lualine.nvim',
+    -- dependencies = { 'nvim-tree/nvim-web-devicons' },
     -- See `:help lualine.txt`
     opts = {
       options = {
@@ -254,7 +257,10 @@ require('lazy').setup({
 vim.o.hlsearch = false
 
 -- Set colour rose-pine
-vim.cmd('colorscheme rose-pine')
+-- vim.cmd('colorscheme rose-pine')
+
+-- Set colour Catppucin
+vim.cmd.colorscheme "catppuccin"
 
 -- Set jade files to be viewed as pug files by treesitter
 vim.cmd [[ autocmd BufRead,BufNewFile *.jade set filetype=pug ]]
@@ -668,10 +674,35 @@ cmp.setup {
       sorter = "case_sensitive",
     },
     view = {
-      width = 30,
+      width = 50,
     },
     renderer = {
       group_empty = true,
+      icons = {
+        glyphs = {
+          default = '',
+          symlink = '',
+          folder = {
+            arrow_closed = '',
+            arrow_open = '',
+            default = '',
+            open = '',
+            empty = '',
+            empty_open = '',
+            symlink = '',
+            symlink_open = '',
+          },
+          git = {
+            unstaged = '',
+            staged = '',
+            unmerged = '',
+            renamed = '',
+            untracked = '',
+            deleted = '',
+            ignored = '',
+          },
+        },
+      },
     },
     filters = {
       dotfiles = true,
