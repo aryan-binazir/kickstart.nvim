@@ -705,7 +705,7 @@ cmp.setup {
       },
     },
     filters = {
-      dotfiles = true,
+      dotfiles = false,
     },
   })
 }
