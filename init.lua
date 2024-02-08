@@ -437,6 +437,8 @@ vim.keymap.set('n', '<leader>ww', ' :w!<CR>')
 vim.keymap.set('n', '<leader>qq', ':q!<CR>')
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
+vim.wo.foldmethod = 'expr'
+vim.wo.foldexpr = 'nvim_treesitter#foldexpr()'
 -- Defer Treesitter setup after first render to improve startup time of 'nvim {filename}'
 vim.defer_fn(function()
   require('nvim-treesitter.configs').setup {
@@ -500,6 +502,10 @@ vim.defer_fn(function()
           ['<leader>A'] = '@parameter.inner',
         },
       },
+    },
+    fold = {
+      enable = true,
+      disable = {}, -- list of languages to disable folding for
     },
   }
 end, 0)
