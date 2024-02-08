@@ -438,6 +438,7 @@ vim.keymap.set('n', '<leader>qq', ':q!<CR>')
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
 vim.wo.foldmethod = 'expr'
+vim.opt.foldenable = false
 vim.wo.foldexpr = 'nvim_treesitter#foldexpr()'
 -- Defer Treesitter setup after first render to improve startup time of 'nvim {filename}'
 vim.defer_fn(function()
