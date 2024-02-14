@@ -177,6 +177,13 @@ require('lazy').setup({
   -- Catppuccin theme
   { "catppuccin/nvim",       name = "catppuccin", priority = 1000 },
 
+  -- Use Harpoon as file marker for quick navigation
+  {
+    "ThePrimeagen/harpoon",
+    branch = "harpoon2",
+    dependencies = { "nvim-lua/plenary.nvim" }
+  },
+
   {
     -- Set lualine as statusline
     'nvim-lualine/lualine.nvim',
@@ -522,6 +529,44 @@ require 'treesitter-context'.setup {
   zindex = 20,
   on_attach = nil,
 }
+
+-- Configure Harpoon
+local harpoon = require('harpoon')
+harpoon:setup({})
+
+-- basic telescope configuration
+local conf = require("telescope.config").values
+local function toggle_telescope(harpoon_files)
+  local file_paths = {}
+  for _, item in ipairs(harpoon_files.items) do
+    table.insert(file_paths, item.value)
+  end
+
+  require("telescope.pickers").new({}, {
+    prompt_title = "Harpoon",
+    finder = require("telescope.finders").new_table({
+      results = file_paths,
+    }),
+    previewer = conf.file_previewer({}),
+    sorter = conf.generic_sorter({}),
+  }):find()
+end
+
+vim.keymap.set("n", "<C-j>", function() toggle_telescope(harpoon:list()) end,
+  { desc = "Open harpoon window" })
+vim.keymap.set("n", "<leader>m", function() harpoon:list():append() end)
+vim.keymap.set("n", "<C-h>", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
+
+vim.keymap.set("n", "<C-q>", function() harpoon:list():select(1) end)
+vim.keymap.set("n", "<C-w>", function() harpoon:list():select(2) end)
+vim.keymap.set("n", "<C-e>", function() harpoon:list():select(3) end)
+vim.keymap.set("n", "<C-r>", function() harpoon:list():select(4) end)
+
+-- Toggle previous & next buffers stored within Harpoon list
+vim.keymap.set("n", "<C-n>", function() harpoon:list():prev() end)
+vim.keymap.set("n", "<C-m>", function() harpoon:list():next() end)
+
+
 -- [[ Configure LSP ]]
 --  This function gets run when an LSP connects to a particular buffer.
 local on_attach = function(_, bufnr)
@@ -572,6 +617,7 @@ require('which-key').register {
   ['<leader>c'] = { name = '[C]ode', _ = 'which_key_ignore' },
   ['<leader>d'] = { name = '[D]ocument', _ = 'which_key_ignore' },
   ['<leader>g'] = { name = '[G]it', _ = 'which_key_ignore' },
+  ['<leader>m'] = { name = '[M]ark Harpoon', _ = 'which_key_ignore' },
   ['<leader>h'] = { name = 'Git [H]unk', _ = 'which_key_ignore' },
   ['<leader>r'] = { name = '[R]ename', _ = 'which_key_ignore' },
   ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
