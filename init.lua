@@ -340,7 +340,7 @@ vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = tr
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
+-- vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 
 -- My Remaps
 
@@ -439,9 +439,10 @@ vim.keymap.set('n', '<leader>sG', ':LiveGrepGitRoot<cr>', { desc = '[S]earch by 
 vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
 vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = '[S]earch [R]esume' })
 -- Mapping leader w to :w!
-vim.keymap.set('n', '<leader>ww', ' :w!<CR>')
--- Mapping leader q to :q
+vim.keymap.set('n', '<leader>ww', ':w!<CR>')
+-- Mapping leader q to :q!
 vim.keymap.set('n', '<leader>qq', ':q!<CR>')
+
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
 vim.wo.foldmethod = 'expr'
