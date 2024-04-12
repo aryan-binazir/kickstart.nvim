@@ -10,6 +10,21 @@ vim.g.loaded_netrwPlugin = 1
 
 -- set termguicolors to enable highlight groups
 vim.opt.termguicolors = true
+
+-- Create binding to toggle diagnostics (lsp) on and off
+vim.g["diagnostics_active"] = true
+function Toggle_diagnostics()
+  if vim.g.diagnostics_active then
+    vim.g.diagnostics_active = false
+    vim.diagnostic.disable()
+  else
+    vim.g.diagnostics_active = true
+    vim.diagnostic.enable()
+  end
+end
+
+vim.keymap.set('n', '<leader>t', Toggle_diagnostics, { noremap = true, silent = true, desc = "Toggle vim diagnostics" })
+
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    https://github.com/folke/lazy.nvim
 --    `:help lazy.nvim.txt` for more info
@@ -643,6 +658,14 @@ require('which-key').register({
 require('mason').setup()
 require('mason-lspconfig').setup()
 
+-- Enable js checking in tsserver for jsdoc
+require("lspconfig").tsserver.setup {
+  settings = {
+    implicitProjectConfiguration = {
+      checkJs = true
+    },
+  }
+}
 -- Enable the following language servers
 --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
 --
