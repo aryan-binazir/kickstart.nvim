@@ -55,7 +55,7 @@ require('lazy').setup({
   'tpope/vim-rhubarb',
 
   -- Detect tabstop and shiftwidth automatically
-  -- 'tpope/vim-sleuth',
+  'tpope/vim-sleuth',
 
   -- NOTE: This is where your plugins related to LSP can be installed.
   --  The configuration is done below. Search for lspconfig to find it below.
@@ -288,9 +288,6 @@ require('lazy').setup({
 -- Set highlight on search
 vim.o.hlsearch = false
 
--- Set colour rose-pine
--- vim.cmd('colorscheme rose-pine')
-
 -- Set colour Catppucin
 vim.cmd.colorscheme "catppuccin"
 
@@ -459,6 +456,8 @@ vim.keymap.set('n', '<C-f>', require('telescope.builtin').live_grep, { desc = 'S
 vim.keymap.set('n', '<leader>sG', ':LiveGrepGitRoot<cr>', { desc = '[S]earch by [G]rep on Git Root' })
 vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
 vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = '[S]earch [R]esume' })
+-- Run vim-sleuth on command
+vim.keymap.set('n', '<leader>sl', function() vim.cmd("Sleuth") end, { desc = '[SL]euth' })
 -- Mapping leader w to :w!
 vim.keymap.set('n', '<leader>ww', ':w!<CR>')
 -- Mapping leader q to :q!
@@ -479,7 +478,7 @@ vim.defer_fn(function()
     auto_install = true,
 
     highlight = { enable = true },
-    indent = { enable = true },
+    indent = { enable = false },
     incremental_selection = {
       enable = true,
       keymaps = {
