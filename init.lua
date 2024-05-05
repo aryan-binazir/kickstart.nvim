@@ -23,7 +23,7 @@ function Toggle_diagnostics()
   end
 end
 
-vim.keymap.set('n', '<leader>t', Toggle_diagnostics, { noremap = true, silent = true, desc = "Toggle vim diagnostics" })
+vim.keymap.set('n', '<leader>tt', Toggle_diagnostics, { noremap = true, silent = true, desc = "Toggle vim diagnostics" })
 
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    https://github.com/folke/lazy.nvim
