@@ -11,7 +11,7 @@ vim.g.loaded_netrwPlugin = 1
 -- set termguicolors to enable highlight groups
 vim.opt.termguicolors = true
 
--- Create binding to toggle diagnostics (lsp) on and off
+-- Create key mapping to toggle diagnostics (lsp) on and off
 vim.g["diagnostics_active"] = true
 function Toggle_diagnostics()
   if vim.g.diagnostics_active then
@@ -24,6 +24,8 @@ function Toggle_diagnostics()
 end
 
 vim.keymap.set('n', '<leader>tt', Toggle_diagnostics, { noremap = true, silent = true, desc = "Toggle vim diagnostics" })
+
+-- Matt's key mapping, back to regular line numbers
 vim.keymap.set('n', '<leader>tr', ':set relativenumber!<CR>',
   { noremap = true, silent = true, desc = "Toggle relative number" })
 
