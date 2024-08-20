@@ -16,7 +16,7 @@ vim.g["diagnostics_active"] = true
 function Toggle_diagnostics()
   if vim.g.diagnostics_active then
     vim.g.diagnostics_active = false
-    vim.diagnostic.disable()
+    vim.diagnostic.enable(false)
   else
     vim.g.diagnostics_active = true
     vim.diagnostic.enable()
@@ -24,6 +24,8 @@ function Toggle_diagnostics()
 end
 
 vim.keymap.set('n', '<leader>tt', Toggle_diagnostics, { noremap = true, silent = true, desc = "Toggle vim diagnostics" })
+vim.keymap.set('n', '<leader>tr', ':set relativenumber!<CR>',
+  { noremap = true, silent = true, desc = "Toggle relative number" })
 
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    https://github.com/folke/lazy.nvim
@@ -35,7 +37,7 @@ if not vim.loop.fs_stat(lazypath) then
     'clone',
     '--filter=blob:none',
     'https://github.com/folke/lazy.nvim.git',
-    '--branch=stable', -- latest stable release
+    '--branch=stable',     -- latest stable release
     lazypath,
   }
 end
@@ -491,7 +493,7 @@ vim.defer_fn(function()
     textobjects = {
       select = {
         enable = true,
-        lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
+        lookahead = true,         -- Automatically jump forward to textobj, similar to targets.vim
         keymaps = {
           -- You can use the capture groups defined in textobjects.scm
           ['aa'] = '@parameter.outer',
@@ -504,7 +506,7 @@ vim.defer_fn(function()
       },
       move = {
         enable = true,
-        set_jumps = true, -- whether to set jumps in the jumplist
+        set_jumps = true,         -- whether to set jumps in the jumplist
         goto_next_start = {
           [']m'] = '@function.outer',
           [']]'] = '@class.outer',
@@ -534,7 +536,7 @@ vim.defer_fn(function()
     },
     fold = {
       enable = true,
-      disable = {}, -- list of languages to disable folding for
+      disable = {},       -- list of languages to disable folding for
     },
   }
 end, 0)
@@ -581,8 +583,7 @@ vim.keymap.set("n", "<C-g>", function() harpoon.ui:toggle_quick_menu(harpoon:lis
 vim.keymap.set("n", "<C-q>", function() harpoon:list():select(1) end)
 vim.keymap.set("n", "<C-w>", function() harpoon:list():select(2) end)
 vim.keymap.set("n", "<C-e>", function() harpoon:list():select(3) end)
-vim.keymap.set("n", "<C-a>", function() harpoon:list():select(4) end)
-vim.keymap.set("n", "<C-s>", function() harpoon:list():select(5) end)
+-- vim.keymap.set("n", "<C-r>", function() harpoon:list():select(4) end)
 
 -- Toggle previous & next buffers stored within Harpoon list
 vim.keymap.set("n", "<C-n>", function() harpoon:list():prev() end)
