@@ -37,7 +37,7 @@ if not vim.loop.fs_stat(lazypath) then
     'clone',
     '--filter=blob:none',
     'https://github.com/folke/lazy.nvim.git',
-    '--branch=stable',     -- latest stable release
+    '--branch=stable', -- latest stable release
     lazypath,
   }
 end
@@ -493,7 +493,7 @@ vim.defer_fn(function()
     textobjects = {
       select = {
         enable = true,
-        lookahead = true,         -- Automatically jump forward to textobj, similar to targets.vim
+        lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
         keymaps = {
           -- You can use the capture groups defined in textobjects.scm
           ['aa'] = '@parameter.outer',
@@ -506,7 +506,7 @@ vim.defer_fn(function()
       },
       move = {
         enable = true,
-        set_jumps = true,         -- whether to set jumps in the jumplist
+        set_jumps = true, -- whether to set jumps in the jumplist
         goto_next_start = {
           [']m'] = '@function.outer',
           [']]'] = '@class.outer',
@@ -536,7 +536,7 @@ vim.defer_fn(function()
     },
     fold = {
       enable = true,
-      disable = {},       -- list of languages to disable folding for
+      disable = {}, -- list of languages to disable folding for
     },
   }
 end, 0)
@@ -577,7 +577,7 @@ end
 
 vim.keymap.set("n", "<C-t>", function() toggle_telescope(harpoon:list()) end,
   { desc = "Open harpoon window" })
-vim.keymap.set("n", "<leader>m", function() harpoon:list():append() end)
+vim.keymap.set("n", "<leader>m", function() harpoon:list():add() end)
 vim.keymap.set("n", "<C-g>", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
 
 vim.keymap.set("n", "<C-q>", function() harpoon:list():select(1) end)
