@@ -236,8 +236,13 @@ require('lazy').setup({
   --rose-pine theme
   -- { 'rose-pine/neovim',      name = 'rose-pine' },
   -- Catppuccin theme
-  { "catppuccin/nvim",        name = "catppuccin", priority = 1000 },
-
+  -- { "catppuccin/nvim",        name = "catppuccin", priority = 1000 },
+  {
+    "folke/tokyonight.nvim",
+    lazy = false,
+    priority = 1000,
+    opts = {},
+  },
   -- Use Harpoon as file marker for quick navigation
   {
     "ThePrimeagen/harpoon",
@@ -276,7 +281,7 @@ require('lazy').setup({
   },
 
   -- "gc" to comment visual regions/lines
-  { 'numToStr/Comment.nvim', opts = {} },
+  { 'numToStr/Comment.nvim',  opts = {} },
 
   -- Fuzzy Finder (files, lsp, etc)
   {
@@ -334,8 +339,11 @@ require('lazy').setup({
 -- Set highlight on search
 vim.o.hlsearch = false
 
--- Set colour Catppucin
-vim.cmd.colorscheme "catppuccin"
+-- Set colourscheme Catppucin
+-- vim.cmd.colorscheme "catppuccin"
+
+-- Set colourscheme tokyonight-night
+vim.cmd [[colorscheme tokyonight-night]]
 
 -- Set jade files to be viewed as pug files by treesitter
 vim.cmd [[ autocmd BufRead,BufNewFile *.jade set filetype=pug ]]
