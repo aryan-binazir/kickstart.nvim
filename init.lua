@@ -144,21 +144,20 @@ require('lazy').setup({
     }
   },
   -- Useful plugin to show you pending keybinds. (disabled)
-  {
-    "folke/which-key.nvim",
-    event = "VeryLazy",
-    opts = {},
-    keys = {
-      {
-        "<leader>?",
-        function()
-          require("which-key").show({ global = false })
-        end,
-        desc = "Buffer Local Keymaps (which-key)",
-      },
-    },
-  },
-
+  -- {
+  --   "folke/which-key.nvim",
+  --   event = "VeryLazy",
+  --   opts = {},
+  --   keys = {
+  --     {
+  --       "<leader>?",
+  --       function()
+  --         require("which-key").show({ global = false })
+  --       end,
+  --       desc = "Buffer Local Keymaps (which-key)",
+  --     },
+  --   },
+  -- },
   {
     -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
@@ -713,13 +712,13 @@ require('mason').setup()
 require('mason-lspconfig').setup()
 
 -- Enable js checking in tsserver for jsdoc
--- require("lspconfig").tsserver.setup {
---   settings = {
---     implicitProjectConfiguration = {
---       checkJs = true
---     },
---   }
--- }
+require("lspconfig").tsserver.setup {
+  settings = {
+    implicitProjectConfiguration = {
+      checkJs = true
+    },
+  }
+}
 -- Enable the following language servers
 --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
 --
@@ -762,9 +761,6 @@ mason_lspconfig.setup {
 
 mason_lspconfig.setup_handlers {
   function(server_name)
-    if server_name == 'tsserver' then
-      server_name = 'ts_ls'
-    end
     require('lspconfig')[server_name].setup {
       capabilities = capabilities,
       on_attach = on_attach,
@@ -867,3 +863,4 @@ cmp.setup {
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
+--
