@@ -756,7 +756,7 @@ capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 local mason_lspconfig = require 'mason-lspconfig'
 
 mason_lspconfig.setup {
-  ensure_installed = { 'go', 'lua', 'python', 'tsx', 'javascript', 'typescript', 'bash', 'pug' },
+  ensure_installed = { "lua_ls", "gopls", "pyright", "eslint", "tsserver", "jsonls" },
 }
 
 mason_lspconfig.setup_handlers {
@@ -863,4 +863,3 @@ cmp.setup {
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
---
