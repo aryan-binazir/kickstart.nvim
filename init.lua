@@ -713,13 +713,13 @@ require('mason').setup()
 require('mason-lspconfig').setup()
 
 -- Enable js checking in tsserver for jsdoc
-require("lspconfig").tsserver.setup {
-  settings = {
-    implicitProjectConfiguration = {
-      checkJs = true
-    },
-  }
-}
+-- require("lspconfig").tsserver.setup {
+--   settings = {
+--     implicitProjectConfiguration = {
+--       checkJs = true
+--     },
+--   }
+-- }
 -- Enable the following language servers
 --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
 --
@@ -762,6 +762,9 @@ mason_lspconfig.setup {
 
 mason_lspconfig.setup_handlers {
   function(server_name)
+    if server_name == 'tsserver' then
+      server_name = 'ts_ls'
+    end
     require('lspconfig')[server_name].setup {
       capabilities = capabilities,
       on_attach = on_attach,
