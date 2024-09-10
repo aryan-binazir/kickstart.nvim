@@ -711,14 +711,6 @@ end
 require('mason').setup()
 require('mason-lspconfig').setup()
 
--- Enable js checking in tsserver for jsdoc
-require("lspconfig").tsserver.setup {
-  settings = {
-    implicitProjectConfiguration = {
-      checkJs = true
-    },
-  }
-}
 -- Enable the following language servers
 --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
 --
@@ -732,7 +724,7 @@ local servers = {
   -- gopls = {},
   -- pyright = {},
   -- rust_analyzer = {},
-  -- tsserver = {},
+  -- ts_ls = {},
   -- html = { filetypes = { 'html', 'twig', 'hbs'} },
 
   lua_ls = {
@@ -756,7 +748,7 @@ capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 local mason_lspconfig = require 'mason-lspconfig'
 
 mason_lspconfig.setup {
-  ensure_installed = { "lua_ls", "gopls", "pyright", "eslint", "tsserver", "jsonls" },
+  ensure_installed = { "lua_ls", "gopls", "pyright", "eslint", "jsonls" },
 }
 
 mason_lspconfig.setup_handlers {
