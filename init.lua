@@ -24,6 +24,7 @@ function Toggle_diagnostics()
 end
 
 vim.keymap.set('n', '<leader>tt', Toggle_diagnostics, { noremap = true, silent = true, desc = "Toggle vim diagnostics" })
+vim.api.nvim_set_keymap('n', '<leader>l8', ':!autopep8 --in-place -a -a %<CR>', { noremap = true, silent = true })
 
 -- Matt's key mapping, back to regular line numbers
 vim.keymap.set('n', '<leader>tr', ':set relativenumber!<CR>',
