@@ -367,10 +367,10 @@ vim.o.clipboard = 'unnamedplus'
 vim.o.breakindent = true
 
 -- Set tabstop to 2 spaces
-vim.o.tabstop = 2
+vim.o.tabstop = 4
 
 -- Set shift width to 2 spaces
-vim.o.shiftwidth = 2
+vim.o.shiftwidth = 4
 
 -- Converts tabs to spaces
 vim.o.expandtab = true
