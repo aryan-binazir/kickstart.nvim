@@ -513,10 +513,9 @@ vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { de
 vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = '[S]earch [R]esume' })
 -- Run vim-sleuth on command
 vim.keymap.set('n', '<leader>sl', function() vim.cmd("Sleuth") end, { desc = '[SL]euth' })
--- Mapping leader w to :w!
--- vim.keymap.set('n', '<leader>ww', ':w!<CR>')
--- Mapping leader q to :q!
--- vim.keymap.set('n', '<leader>qq', ':q!<CR>')
+
+-- Mapping leader q to :q! -- Prefer not to use but good when have to use :q! multiple times
+vim.keymap.set('n', '<leader>qq', ':q!<CR>')
 
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
