@@ -514,9 +514,9 @@ vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = 
 -- Run vim-sleuth on command
 vim.keymap.set('n', '<leader>sl', function() vim.cmd("Sleuth") end, { desc = '[SL]euth' })
 -- Mapping leader w to :w!
-vim.keymap.set('n', '<leader>ww', ':w!<CR>')
+-- vim.keymap.set('n', '<leader>ww', ':w!<CR>')
 -- Mapping leader q to :q!
-vim.keymap.set('n', '<leader>qq', ':q!<CR>')
+-- vim.keymap.set('n', '<leader>qq', ':q!<CR>')
 
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
