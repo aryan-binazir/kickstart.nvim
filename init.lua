@@ -516,6 +516,7 @@ vim.keymap.set('n', '<leader>sl', function() vim.cmd("Sleuth") end, { desc = '[S
 
 -- Mapping leader q to :q! -- Prefer not to use but good when have to use :q! multiple times
 vim.keymap.set('n', '<leader>qq', ':q!<CR>')
+vim.keymap.set('n', '<leader>wq', ':wq!<CR>')
 
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
