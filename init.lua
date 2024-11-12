@@ -251,6 +251,32 @@ require('lazy').setup({
     dependencies = { "nvim-lua/plenary.nvim" }
   },
   {
+    "github/copilot.vim",
+    lazy = false,
+    config = function()
+      -- Disable default tab mapping
+      vim.g.copilot_no_tab_map = true
+      vim.g.copilot_assume_mapped = true
+      vim.g.copilot_tab_fallback = ""
+
+      -- Enable ghost text
+      vim.g.copilot_ghost_text = true
+
+      -- Key mappings for accepting/rejecting suggestions
+      vim.api.nvim_set_keymap('i', '<C-a>', 'copilot#Accept("<CR>")', { silent = true, expr = true })
+      vim.api.nvim_set_keymap('i', '<C-s>', 'copilot#Dismiss()', { silent = true, expr = true })
+
+
+      vim.keymap.set('n', '<leader>tc', function()
+        if vim.g.copilot_enabled == true then
+          vim.cmd('Copilot disable')
+        else
+          vim.cmd('Copilot enable')
+        end
+      end, { silent = true, noremap = true })
+    end
+  },
+  {
     'windwp/nvim-autopairs',
     event = "InsertEnter",
     config = true
@@ -636,8 +662,8 @@ vim.keymap.set("n", "<C-g>", function() harpoon.ui:toggle_quick_menu(harpoon:lis
 vim.keymap.set("n", "<C-q>", function() harpoon:list():select(1) end)
 vim.keymap.set("n", "<C-w>", function() harpoon:list():select(2) end)
 vim.keymap.set("n", "<C-e>", function() harpoon:list():select(3) end)
-vim.keymap.set("n", "<C-a>", function() harpoon:list():select(4) end)
-vim.keymap.set("n", "<C-s>", function() harpoon:list():select(5) end)
+-- vim.keymap.set("n", "<C-a>", function() harpoon:list():select(4) end)
+-- vim.keymap.set("n", "<C-s>", function() harpoon:list():select(5) end)
 
 -- Toggle previous & next buffers stored within Harpoon list
 vim.keymap.set("n", "<C-n>", function() harpoon:list():prev() end)
