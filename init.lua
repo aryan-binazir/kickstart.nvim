@@ -92,6 +92,7 @@ require('lazy').setup({
     },
   },
   { 'nvim-tree/nvim-tree.lua' },
+  { "supermaven-inc/supermaven-nvim" },
   {
     -- Autocompletion
     'hrsh7th/nvim-cmp',
@@ -250,32 +251,36 @@ require('lazy').setup({
     branch = "harpoon2",
     dependencies = { "nvim-lua/plenary.nvim" }
   },
-  {
-    "github/copilot.vim",
-    lazy = false,
-    config = function()
-      -- Disable default tab mapping
-      vim.g.copilot_no_tab_map = true
-      vim.g.copilot_assume_mapped = true
-      vim.g.copilot_tab_fallback = ""
-
-      -- Enable ghost text
-      vim.g.copilot_ghost_text = true
-
-      -- Key mappings for accepting/rejecting suggestions
-      vim.api.nvim_set_keymap('i', '<C-a>', 'copilot#Accept("<CR>")', { silent = true, expr = true })
-      vim.api.nvim_set_keymap('i', '<C-s>', 'copilot#Dismiss()', { silent = true, expr = true })
-
-
-      vim.keymap.set('n', '<leader>tc', function()
-        if vim.g.copilot_enabled == true then
-          vim.cmd('Copilot disable')
-        else
-          vim.cmd('Copilot enable')
-        end
-      end, { silent = true, noremap = true })
-    end
-  },
+  -- {
+  --   "github/copilot.vim",
+  --   lazy = false,
+  --   config = function()
+  --     -- Disable Copilot by default
+  --     vim.g.copilot_enabled = false
+  --
+  --     -- Disable default tab mapping
+  --     -- vim.g.copilot_no_tab_map = false
+  --     vim.g.copilot_assume_mapped = true
+  --
+  --     -- Enable ghost text
+  --     vim.g.copilot_ghost_text = true
+  --
+  --     vim.keymap.set('i', '<C-e>', function()
+  --       return vim.fn["copilot#Dismiss"]()
+  --     end, { silent = true, expr = true })
+  --
+  --     -- Toggle Copilot with <leader>tc
+  --     vim.keymap.set('n', '<leader>tc', function()
+  --       if vim.g.copilot_enabled then
+  --         vim.cmd('Copilot disable')
+  --         vim.g.copilot_enabled = false
+  --       else
+  --         vim.cmd('Copilot enable')
+  --         vim.g.copilot_enabled = true
+  --       end
+  --     end, { silent = true, noremap = true })
+  --   end
+  -- },
   {
     'windwp/nvim-autopairs',
     event = "InsertEnter",
@@ -308,7 +313,7 @@ require('lazy').setup({
   },
 
   -- "gc" to comment visual regions/lines
-  { 'numToStr/Comment.nvim',  opts = {} },
+  { 'numToStr/Comment.nvim', opts = {} },
 
   -- Fuzzy Finder (files, lsp, etc)
   {
@@ -470,6 +475,43 @@ require('telescope').setup {
     },
   },
 }
+
+require("supermaven-nvim").setup({
+  keymaps = {
+    accept_suggestion = "<Tab>",
+    clear_suggestion = "<C-e>",
+    accept_word = "<C-j>",
+  },
+  ignore_filetypes = { cpp = true }, -- or { "cpp", }
+  color = {
+    suggestion_color = "#ffffff",
+    cterm = 244,
+  },
+  log_level = "off",                 -- set to "off" to disable logging completely
+  disable_inline_completion = false, -- disables inline completion for use with cmp
+  disable_keymaps = false,           -- disables built in keymaps for more manual control
+  condition = function()
+    return false
+  end -- condition to check for stopping supermaven, `true` means to stop supermaven when the condition is true.
+})
+
+-- Require the supermaven API
+local api = require("supermaven-nvim.api")
+
+-- Turn off by default
+vim.api.nvim_create_autocmd("VimEnter", {
+  callback = function()
+    api.stop()
+  end,
+})
+
+-- Set up keybinding to toggle supermaven-nvim with <leader>tl
+vim.api.nvim_set_keymap(
+  "n",
+  "<leader>tl",
+  ":lua require('supermaven-nvim.api').toggle()<CR>",
+  { noremap = true, silent = true }
+)
 
 -- Enable telescope fzf native, if installed
 pcall(require('telescope').load_extension, 'fzf')
@@ -659,11 +701,11 @@ end
 vim.keymap.set("n", "<leader>m", function() harpoon:list():add() end)
 vim.keymap.set("n", "<C-g>", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
 
-vim.keymap.set("n", "<C-q>", function() harpoon:list():select(1) end)
-vim.keymap.set("n", "<C-w>", function() harpoon:list():select(2) end)
-vim.keymap.set("n", "<C-e>", function() harpoon:list():select(3) end)
--- vim.keymap.set("n", "<C-a>", function() harpoon:list():select(4) end)
--- vim.keymap.set("n", "<C-s>", function() harpoon:list():select(5) end)
+vim.keymap.set("n", "<C-1>", function() harpoon:list():select(1) end)
+vim.keymap.set("n", "<C-2>", function() harpoon:list():select(2) end)
+vim.keymap.set("n", "<C-3>", function() harpoon:list():select(3) end)
+vim.keymap.set("n", "<C-4>", function() harpoon:list():select(4) end)
+vim.keymap.set("n", "<C-5>", function() harpoon:list():select(5) end)
 
 -- Toggle previous & next buffers stored within Harpoon list
 vim.keymap.set("n", "<C-n>", function() harpoon:list():prev() end)
@@ -839,6 +881,7 @@ cmp.setup {
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
     { name = 'path' },
+    -- { name = "supermaven" },
   },
   require("nvim-tree").setup({
     sort = {
