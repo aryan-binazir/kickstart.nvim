@@ -92,7 +92,7 @@ require('lazy').setup({
     },
   },
   { 'nvim-tree/nvim-tree.lua' },
-  { "supermaven-inc/supermaven-nvim" },
+  -- { "supermaven-inc/supermaven-nvim" },
   {
     -- Autocompletion
     'hrsh7th/nvim-cmp',
@@ -313,7 +313,7 @@ require('lazy').setup({
   },
 
   -- "gc" to comment visual regions/lines
-  { 'numToStr/Comment.nvim', opts = {} },
+  { 'numToStr/Comment.nvim',  opts = {} },
 
   -- Fuzzy Finder (files, lsp, etc)
   {
@@ -476,32 +476,32 @@ require('telescope').setup {
   },
 }
 
-require("supermaven-nvim").setup({
-  keymaps = {
-    accept_suggestion = "<Tab>",
-    clear_suggestion = "<C-e>",
-    accept_word = "<C-j>",
-  },
-  ignore_filetypes = {}, -- or { "cpp", }
-  color = {
-    suggestion_color = "#ffffff",
-    cterm = 244,
-  },
-  log_level = "off",                 -- set to "off" to disable logging completely
-  disable_inline_completion = false, -- disables inline completion for use with cmp
-  disable_keymaps = false,           -- disables built in keymaps for more manual control
-  condition = function()
-    return true
-  end -- condition to check for stopping supermaven, `true` means to stop supermaven when the condition is true.
-})
-
--- Set up keybinding to toggle supermaven-nvim with <leader>tl
-vim.api.nvim_set_keymap(
-  "n",
-  "<leader>tl",
-  ":lua require('supermaven-nvim.api').toggle()<CR>",
-  { noremap = true, silent = true }
-)
+-- require("supermaven-nvim").setup({
+--   keymaps = {
+--     accept_suggestion = "<Tab>",
+--     clear_suggestion = "<C-e>",
+--     accept_word = "<C-j>",
+--   },
+--   ignore_filetypes = {}, -- or { "cpp", }
+--   color = {
+--     suggestion_color = "#ffffff",
+--     cterm = 244,
+--   },
+--   log_level = "off",                 -- set to "off" to disable logging completely
+--   disable_inline_completion = false, -- disables inline completion for use with cmp
+--   disable_keymaps = false,           -- disables built in keymaps for more manual control
+--   condition = function()
+--     return true
+--   end -- condition to check for stopping supermaven, `true` means to stop supermaven when the condition is true.
+-- })
+--
+-- -- Set up keybinding to toggle supermaven-nvim with <leader>tl
+-- vim.api.nvim_set_keymap(
+--   "n",
+--   "<leader>tl",
+--   ":lua require('supermaven-nvim.api').toggle()<CR>",
+--   { noremap = true, silent = true }
+-- )
 
 -- Enable telescope fzf native, if installed
 pcall(require('telescope').load_extension, 'fzf')
