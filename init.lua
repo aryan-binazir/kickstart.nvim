@@ -482,7 +482,7 @@ require("supermaven-nvim").setup({
     clear_suggestion = "<C-e>",
     accept_word = "<C-j>",
   },
-  ignore_filetypes = { cpp = true }, -- or { "cpp", }
+  ignore_filetypes = {}, -- or { "cpp", }
   color = {
     suggestion_color = "#ffffff",
     cterm = 244,
@@ -491,19 +491,19 @@ require("supermaven-nvim").setup({
   disable_inline_completion = false, -- disables inline completion for use with cmp
   disable_keymaps = false,           -- disables built in keymaps for more manual control
   condition = function()
-    return false
+    return true
   end -- condition to check for stopping supermaven, `true` means to stop supermaven when the condition is true.
 })
 
 -- Require the supermaven API
-local api = require("supermaven-nvim.api")
+-- local api = require("supermaven-nvim.api")
 
 -- Turn off by default
-vim.api.nvim_create_autocmd("VimEnter", {
-  callback = function()
-    api.stop()
-  end,
-})
+-- vim.api.nvim_create_autocmd("VimEnter", {
+--   callback = function()
+--     api.stop()
+--   end,
+-- })
 
 -- Set up keybinding to toggle supermaven-nvim with <leader>tl
 vim.api.nvim_set_keymap(
