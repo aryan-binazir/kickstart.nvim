@@ -234,36 +234,36 @@ require('lazy').setup({
     branch = "harpoon2",
     dependencies = { "nvim-lua/plenary.nvim" }
   },
-  {
-    "github/copilot.vim",
-    lazy = false,
-    config = function()
-      -- Disable Copilot by default
-      vim.g.copilot_enabled = true
-
-      -- Disable default tab mapping
-      -- vim.g.copilot_no_tab_map = false
-      vim.g.copilot_assume_mapped = true
-
-      -- Enable ghost text
-      vim.g.copilot_ghost_text = true
-
-      vim.keymap.set('i', '<C-e>', function()
-        return vim.fn["copilot#Dismiss"]()
-      end, { silent = true, expr = true })
-
-      -- Toggle Copilot with <leader>tc
-      vim.keymap.set('n', '<leader>tc', function()
-        if vim.g.copilot_enabled then
-          vim.cmd('Copilot disable')
-          vim.g.copilot_enabled = false
-        else
-          vim.cmd('Copilot enable')
-          vim.g.copilot_enabled = true
-        end
-      end, { silent = true, noremap = true })
-    end
-  },
+  -- {
+  --   "github/copilot.vim",
+  --   lazy = false,
+  --   config = function()
+  --     -- Disable Copilot by default
+  --     vim.g.copilot_enabled = true
+  --
+  --     -- Disable default tab mapping
+  --     -- vim.g.copilot_no_tab_map = false
+  --     vim.g.copilot_assume_mapped = true
+  --
+  --     -- Enable ghost text
+  --     vim.g.copilot_ghost_text = true
+  --
+  --     vim.keymap.set('i', '<C-e>', function()
+  --       return vim.fn["copilot#Dismiss"]()
+  --     end, { silent = true, expr = true })
+  --
+  --     -- Toggle Copilot with <leader>tc
+  --     vim.keymap.set('n', '<leader>tc', function()
+  --       if vim.g.copilot_enabled then
+  --         vim.cmd('Copilot disable')
+  --         vim.g.copilot_enabled = false
+  --       else
+  --         vim.cmd('Copilot enable')
+  --         vim.g.copilot_enabled = true
+  --       end
+  --     end, { silent = true, noremap = true })
+  --   end
+  -- },
   {
     'windwp/nvim-autopairs',
     event = "InsertEnter",
