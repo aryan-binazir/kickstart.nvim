@@ -11,7 +11,7 @@ vim.g.loaded_netrwPlugin = 1
 -- set termguicolors to enable highlight groups
 vim.opt.termguicolors = true
 
--- Create key mapping to toggle diagnostics (lsp) on and off
+-- create key mapping to toggle diagnostics (lsp) on and off
 vim.g["diagnostics_active"] = true
 function Toggle_diagnostics()
   if vim.g.diagnostics_active then
@@ -24,10 +24,10 @@ function Toggle_diagnostics()
 end
 
 vim.keymap.set('n', '<leader>tt', Toggle_diagnostics, { noremap = true, silent = true, desc = "Toggle vim diagnostics" })
-vim.api.nvim_set_keymap('n', '<leader>l8', ':!autopep8 --in-place -a -a -a --max-line-length 79 %<CR>',
+
+vim.api.nvim_set_keymap('n', '<leader>l8', ':!autopep8 --in-place -a -a -a -a --max-line-length 79 %<CR>',
   { noremap = true, silent = true })
 
--- Matt's key mapping, back to regular line numbers
 vim.keymap.set('n', '<leader>tr', ':set relativenumber!<CR>',
   { noremap = true, silent = true, desc = "Toggle relative number" })
 
@@ -92,7 +92,7 @@ require('lazy').setup({
     },
   },
   { 'nvim-tree/nvim-tree.lua' },
-  -- { "supermaven-inc/supermaven-nvim" },
+  { "supermaven-inc/supermaven-nvim" },
   {
     -- Autocompletion
     'hrsh7th/nvim-cmp',
@@ -146,21 +146,6 @@ require('lazy').setup({
       { "<leader>lg", "<cmd>LazyGit<cr>", desc = "LazyGit" }
     }
   },
-  -- Useful plugin to show you pending keybinds. (disabled)
-  -- {
-  --   "folke/which-key.nvim",
-  --   event = "VeryLazy",
-  --   opts = {},
-  --   keys = {
-  --     {
-  --       "<leader>?",
-  --       function()
-  --         require("which-key").show({ global = false })
-  --       end,
-  --       desc = "Buffer Local Keymaps (which-key)",
-  --     },
-  --   },
-  -- },
   {
     -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
@@ -235,9 +220,7 @@ require('lazy').setup({
       end,
     },
   },
-  --rose-pine theme
-  -- { 'rose-pine/neovim',      name = 'rose-pine' },
-  -- Catppuccin theme
+  -- Themes
   -- { "catppuccin/nvim",        name = "catppuccin", priority = 1000 },
   {
     "folke/tokyonight.nvim",
@@ -251,36 +234,36 @@ require('lazy').setup({
     branch = "harpoon2",
     dependencies = { "nvim-lua/plenary.nvim" }
   },
-  -- {
-  --   "github/copilot.vim",
-  --   lazy = false,
-  --   config = function()
-  --     -- Disable Copilot by default
-  --     vim.g.copilot_enabled = false
-  --
-  --     -- Disable default tab mapping
-  --     -- vim.g.copilot_no_tab_map = false
-  --     vim.g.copilot_assume_mapped = true
-  --
-  --     -- Enable ghost text
-  --     vim.g.copilot_ghost_text = true
-  --
-  --     vim.keymap.set('i', '<C-e>', function()
-  --       return vim.fn["copilot#Dismiss"]()
-  --     end, { silent = true, expr = true })
-  --
-  --     -- Toggle Copilot with <leader>tc
-  --     vim.keymap.set('n', '<leader>tc', function()
-  --       if vim.g.copilot_enabled then
-  --         vim.cmd('Copilot disable')
-  --         vim.g.copilot_enabled = false
-  --       else
-  --         vim.cmd('Copilot enable')
-  --         vim.g.copilot_enabled = true
-  --       end
-  --     end, { silent = true, noremap = true })
-  --   end
-  -- },
+  {
+    "github/copilot.vim",
+    lazy = false,
+    config = function()
+      -- Disable Copilot by default
+      vim.g.copilot_enabled = true
+
+      -- Disable default tab mapping
+      -- vim.g.copilot_no_tab_map = false
+      vim.g.copilot_assume_mapped = true
+
+      -- Enable ghost text
+      vim.g.copilot_ghost_text = true
+
+      vim.keymap.set('i', '<C-e>', function()
+        return vim.fn["copilot#Dismiss"]()
+      end, { silent = true, expr = true })
+
+      -- Toggle Copilot with <leader>tc
+      vim.keymap.set('n', '<leader>tc', function()
+        if vim.g.copilot_enabled then
+          vim.cmd('Copilot disable')
+          vim.g.copilot_enabled = false
+        else
+          vim.cmd('Copilot enable')
+          vim.g.copilot_enabled = true
+        end
+      end, { silent = true, noremap = true })
+    end
+  },
   {
     'windwp/nvim-autopairs',
     event = "InsertEnter",
@@ -313,7 +296,7 @@ require('lazy').setup({
   },
 
   -- "gc" to comment visual regions/lines
-  { 'numToStr/Comment.nvim',  opts = {} },
+  { 'numToStr/Comment.nvim', opts = {} },
 
   -- Fuzzy Finder (files, lsp, etc)
   {
@@ -487,15 +470,15 @@ require('telescope').setup {
 --     suggestion_color = "#ffffff",
 --     cterm = 244,
 --   },
---   log_level = "off",                 -- set to "off" to disable logging completely
---   disable_inline_completion = false, -- disables inline completion for use with cmp
---   disable_keymaps = false,           -- disables built in keymaps for more manual control
+--   log_level = "off",                -- set to "off" to disable logging completely
+--   disable_inline_completion = true, -- disables inline completion for use with cmp
+--   disable_keymaps = false,          -- disables built in keymaps for more manual control
 --   condition = function()
---     return true
+--     return false
 --   end -- condition to check for stopping supermaven, `true` means to stop supermaven when the condition is true.
 -- })
---
--- -- Set up keybinding to toggle supermaven-nvim with <leader>tl
+
+-- Set up keybinding to toggle supermaven-nvim with <leader>tl
 -- vim.api.nvim_set_keymap(
 --   "n",
 --   "<leader>tl",
@@ -665,37 +648,19 @@ require 'treesitter-context'.setup {
 }
 
 -- Configure Harpoon
-local harpoon = require('harpoon')
-harpoon:setup({})
-
--- basic telescope configuration
-local conf = require("telescope.config").values
-local function toggle_telescope(harpoon_files)
-  local file_paths = {}
-  for _, item in ipairs(harpoon_files.items) do
-    table.insert(file_paths, item.value)
-  end
-
-  require("telescope.pickers").new({}, {
-    prompt_title = "Harpoon",
-    finder = require("telescope.finders").new_table({
-      results = file_paths,
-    }),
-    previewer = conf.file_previewer({}),
-    sorter = conf.generic_sorter({}),
-  }):find()
-end
+local harpoon = require("harpoon")
+harpoon:setup()
 
 -- vim.keymap.set("n", "<C-t>", function() toggle_telescope(harpoon:list()) end,
 --   { desc = "Open harpoon window" })
+-- vim.keymap.set("n", "<leader>m", function() harpoon:list():append() end)
 vim.keymap.set("n", "<leader>m", function() harpoon:list():add() end)
 vim.keymap.set("n", "<C-g>", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
 
-vim.keymap.set("n", "<C-1>", function() harpoon:list():select(1) end)
-vim.keymap.set("n", "<C-2>", function() harpoon:list():select(2) end)
-vim.keymap.set("n", "<C-3>", function() harpoon:list():select(3) end)
-vim.keymap.set("n", "<C-4>", function() harpoon:list():select(4) end)
-vim.keymap.set("n", "<C-5>", function() harpoon:list():select(5) end)
+vim.keymap.set("n", "<C-q>", function() harpoon:list():select(1) end)
+vim.keymap.set("n", "<C-w>", function() harpoon:list():select(2) end)
+vim.keymap.set("n", "<C-a>", function() harpoon:list():select(3) end)
+vim.keymap.set("n", "<C-s>", function() harpoon:list():select(4) end)
 
 -- Toggle previous & next buffers stored within Harpoon list
 vim.keymap.set("n", "<C-n>", function() harpoon:list():prev() end)
@@ -747,31 +712,11 @@ local on_attach = function(_, bufnr)
   end, { desc = 'Format current buffer with LSP' })
 end
 
--- -- document existing key chains
--- require('which-key').add {
---   ['<leader>c'] = { name = '[C]ode', _ = 'which_key_ignore' },
---   ['<leader>d'] = { name = '[D]ocument', _ = 'which_key_ignore' },
---   ['<leader>g'] = { name = '[G]it', _ = 'which_key_ignore' },
---   ['<leader>m'] = { name = '[M]ark Harpoon', _ = 'which_key_ignore' },
---   ['<leader>h'] = { name = 'Git [H]unk', _ = 'which_key_ignore' },
---   ['<leader>r'] = { name = '[R]ename', _ = 'which_key_ignore' },
---   ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
---   ['<leader>t'] = { name = '[T]oggle', _ = 'which_key_ignore' },
---   ['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
--- }
--- -- register which-key VISUAL mode
--- -- required for visual <leader>hs (hunk stage) to work
--- require('which-key').add({
---   ['<leader>'] = { name = 'VISUAL <leader>' },
---   ['<leader>h'] = { 'Git [H]unk' },
--- }, { mode = 'v' })
-
 -- mason-lspconfig requires that these setup functions are called in this order
 -- before setting up the servers.
 require('mason').setup()
 require('mason-lspconfig').setup()
 
--- Enable the following language servers
 --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
 --
 --  Add any additional override configuration in the following tables. They will be passed to
@@ -780,12 +725,6 @@ require('mason-lspconfig').setup()
 --  If you want to override the default filetypes that your language server will attach to you can
 --  define the property 'filetypes' to the map in question.
 local servers = {
-  -- clangd = {},
-  -- gopls = {},
-  -- pyright = {},
-  -- rust_analyzer = {},
-  -- ts_ls = {},
-  -- html = { filetypes = { 'html', 'twig', 'hbs'} },
 
   lua_ls = {
     Lua = {
@@ -808,7 +747,7 @@ capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 local mason_lspconfig = require 'mason-lspconfig'
 
 mason_lspconfig.setup {
-  ensure_installed = { "lua_ls", "gopls", "pyright", "eslint", "jsonls" },
+  ensure_installed = {} -- { "lua_ls", "gopls", "pyright", "eslint", "jsonls" },
 }
 
 mason_lspconfig.setup_handlers {
@@ -915,4 +854,3 @@ cmp.setup {
 }
 
 -- The line beneath this is called `modeline`. See `:help modeline`
--- vim: ts=2 sts=2 sw=2 et
