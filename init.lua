@@ -92,7 +92,6 @@ require('lazy').setup({
     },
   },
   { 'nvim-tree/nvim-tree.lua' },
-  { "supermaven-inc/supermaven-nvim" },
   {
     -- Autocompletion
     'hrsh7th/nvim-cmp',
@@ -100,6 +99,7 @@ require('lazy').setup({
       -- Snippet Engine & its associated nvim-cmp source
       'L3MON4D3/LuaSnip',
       'saadparwaiz1/cmp_luasnip',
+      -- "supermaven-inc/supermaven-nvim",
 
       -- Adds LSP completion capabilities
       'hrsh7th/cmp-nvim-lsp',
@@ -296,7 +296,7 @@ require('lazy').setup({
   },
 
   -- "gc" to comment visual regions/lines
-  { 'numToStr/Comment.nvim', opts = {} },
+  { 'numToStr/Comment.nvim',  opts = {} },
 
   -- Fuzzy Finder (files, lsp, etc)
   {
@@ -470,7 +470,7 @@ require('telescope').setup {
 --     suggestion_color = "#ffffff",
 --     cterm = 244,
 --   },
---   log_level = "off",                -- set to "off" to disable logging completely
+--   log_level = "info",               -- set to "off" to disable logging completely
 --   disable_inline_completion = true, -- disables inline completion for use with cmp
 --   disable_keymaps = false,          -- disables built in keymaps for more manual control
 --   condition = function()
@@ -634,6 +634,7 @@ vim.defer_fn(function()
     },
   }
 end, 0)
+
 require 'treesitter-context'.setup {
   enable = true,
   max_lines = 0,
