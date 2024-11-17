@@ -99,7 +99,6 @@ require('lazy').setup({
       -- Snippet Engine & its associated nvim-cmp source
       'L3MON4D3/LuaSnip',
       'saadparwaiz1/cmp_luasnip',
-      -- "supermaven-inc/supermaven-nvim",
 
       -- Adds LSP completion capabilities
       'hrsh7th/cmp-nvim-lsp',
@@ -459,33 +458,6 @@ require('telescope').setup {
   },
 }
 
--- require("supermaven-nvim").setup({
---   keymaps = {
---     accept_suggestion = "<Tab>",
---     clear_suggestion = "<C-e>",
---     accept_word = "<C-j>",
---   },
---   ignore_filetypes = {}, -- or { "cpp", }
---   color = {
---     suggestion_color = "#ffffff",
---     cterm = 244,
---   },
---   log_level = "info",               -- set to "off" to disable logging completely
---   disable_inline_completion = true, -- disables inline completion for use with cmp
---   disable_keymaps = false,          -- disables built in keymaps for more manual control
---   condition = function()
---     return false
---   end -- condition to check for stopping supermaven, `true` means to stop supermaven when the condition is true.
--- })
-
--- Set up keybinding to toggle supermaven-nvim with <leader>tl
--- vim.api.nvim_set_keymap(
---   "n",
---   "<leader>tl",
---   ":lua require('supermaven-nvim.api').toggle()<CR>",
---   { noremap = true, silent = true }
--- )
-
 -- Enable telescope fzf native, if installed
 pcall(require('telescope').load_extension, 'fzf')
 
@@ -811,7 +783,6 @@ cmp.setup {
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
     { name = 'path' },
-    -- { name = 'supermaven' }
   },
   require("nvim-tree").setup({
     sort = {
