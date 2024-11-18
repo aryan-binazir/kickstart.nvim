@@ -263,6 +263,26 @@ require('lazy').setup({
   --     end, { silent = true, noremap = true })
   --   end
   -- },
+  -- {
+  --   "CopilotC-Nvim/CopilotChat.nvim",
+  --   branch = "canary",
+  --   dependencies = {
+  --     { "github/copilot.lua" },    -- or github/copilot.vim
+  --     { "nvim-lua/plenary.nvim" }, -- for curl, log wrapper
+  --   },
+  --   build = "make tiktoken",       -- Only on MacOS or Linux
+  --   opts = {
+  --     -- See Configuration section for options
+  --   },
+  --   -- See Commands section for default commands if you want to lazy load on them
+  --   vim.keymap.set('n', '<leader>tv', function()
+  --     vim.cmd('CopilotChatToggle')
+  --   end, { silent = true, noremap = true })
+  --
+  --   -- vim.keymap.set('n', '<leader>tm', function()
+  --   --   vim.cmd('CopilotChatModels')
+  --   -- end, { silent = true, noremap = true })
+  -- },
   {
     'windwp/nvim-autopairs',
     event = "InsertEnter",
