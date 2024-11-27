@@ -233,56 +233,56 @@ require('lazy').setup({
     branch = "harpoon2",
     dependencies = { "nvim-lua/plenary.nvim" }
   },
-  -- {
-  --   "github/copilot.vim",
-  --   lazy = false,
-  --   config = function()
-  --     -- Disable Copilot by default
-  --     vim.g.copilot_enabled = true
-  --
-  --     -- Disable default tab mapping
-  --     -- vim.g.copilot_no_tab_map = false
-  --     vim.g.copilot_assume_mapped = true
-  --
-  --     -- Enable ghost text
-  --     vim.g.copilot_ghost_text = true
-  --
-  --     vim.keymap.set('i', '<C-e>', function()
-  --       return vim.fn["copilot#Dismiss"]()
-  --     end, { silent = true, expr = true })
-  --
-  --     -- Toggle Copilot with <leader>tc
-  --     vim.keymap.set('n', '<leader>tc', function()
-  --       if vim.g.copilot_enabled then
-  --         vim.cmd('Copilot disable')
-  --         vim.g.copilot_enabled = false
-  --       else
-  --         vim.cmd('Copilot enable')
-  --         vim.g.copilot_enabled = true
-  --       end
-  --     end, { silent = true, noremap = true })
-  --   end
-  -- },
-  -- {
-  --   "CopilotC-Nvim/CopilotChat.nvim",
-  --   branch = "canary",
-  --   dependencies = {
-  --     { "github/copilot.vim" },
-  --     { "nvim-lua/plenary.nvim" },
-  --   },
-  --   build = "make tiktoken",
-  --   opts = {
-  --     -- See Configuration section for options
-  --   },
-  --   -- See Commands section for default commands if you want to lazy load on them
-  --   vim.keymap.set('n', '<leader>tv', function()
-  --     vim.cmd('CopilotChatToggle')
-  --   end, { silent = true, noremap = true })
-  --
-  --   -- vim.keymap.set('n', '<leader>tm', function()
-  --   --   vim.cmd('CopilotChatModels')
-  --   -- end, { silent = true, noremap = true })
-  -- },
+  {
+    "github/copilot.vim",
+    lazy = false,
+    config = function()
+      -- Disable Copilot by default
+      vim.g.copilot_enabled = false
+
+      -- Disable default tab mapping
+      -- vim.g.copilot_no_tab_map = false
+      vim.g.copilot_assume_mapped = true
+
+      -- Enable ghost text
+      vim.g.copilot_ghost_text = true
+
+      vim.keymap.set('i', '<C-e>', function()
+        return vim.fn["copilot#Dismiss"]()
+      end, { silent = true, expr = true })
+
+      -- Toggle Copilot with <leader>tc
+      vim.keymap.set('n', '<leader>tc', function()
+        if vim.g.copilot_enabled then
+          vim.cmd('Copilot disable')
+          vim.g.copilot_enabled = false
+        else
+          vim.cmd('Copilot enable')
+          vim.g.copilot_enabled = true
+        end
+      end, { silent = true, noremap = true })
+    end
+  },
+  {
+    "CopilotC-Nvim/CopilotChat.nvim",
+    branch = "canary",
+    dependencies = {
+      { "github/copilot.vim" },
+      { "nvim-lua/plenary.nvim" },
+    },
+    build = "make tiktoken",
+    opts = {
+      -- See Configuration section for options
+    },
+    -- See Commands section for default commands if you want to lazy load on them
+    vim.keymap.set('n', '<leader>tv', function()
+      vim.cmd('CopilotChatToggle')
+    end, { silent = true, noremap = true }),
+
+    vim.keymap.set('n', '<leader>tm', function()
+      vim.cmd('CopilotChatModels')
+    end, { silent = true, noremap = true })
+  },
   {
     'windwp/nvim-autopairs',
     event = "InsertEnter",
