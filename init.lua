@@ -233,56 +233,6 @@ require('lazy').setup({
     branch = "harpoon2",
     dependencies = { "nvim-lua/plenary.nvim" }
   },
-  -- {
-  --   "github/copilot.vim",
-  --   lazy = false,
-  --   config = function()
-  --     -- Disable Copilot by default
-  --     vim.g.copilot_enabled = false
-  --
-  --     -- Disable default tab mapping
-  --     -- vim.g.copilot_no_tab_map = false
-  --     vim.g.copilot_assume_mapped = true
-  --
-  --     -- Enable ghost text
-  --     vim.g.copilot_ghost_text = true
-  --
-  --     vim.keymap.set('i', '<C-e>', function()
-  --       return vim.fn["copilot#Dismiss"]()
-  --     end, { silent = true, expr = true })
-  --
-  --     -- Toggle Copilot with <leader>tc
-  --     vim.keymap.set('n', '<leader>tc', function()
-  --       if vim.g.copilot_enabled then
-  --         vim.cmd('Copilot disable')
-  --         vim.g.copilot_enabled = false
-  --       else
-  --         vim.cmd('Copilot enable')
-  --         vim.g.copilot_enabled = true
-  --       end
-  --     end, { silent = true, noremap = true })
-  --   end
-  -- },
-  -- {
-  --   "CopilotC-Nvim/CopilotChat.nvim",
-  --   branch = "canary",
-  --   dependencies = {
-  --     { "github/copilot.vim" },
-  --     { "nvim-lua/plenary.nvim" },
-  --   },
-  --   build = "make tiktoken",
-  --   opts = {
-  --     -- See Configuration section for options
-  --   },
-  --   -- See Commands section for default commands if you want to lazy load on them
-  --   vim.keymap.set('n', '<leader>tv', function()
-  --     vim.cmd('CopilotChatToggle')
-  --   end, { silent = true, noremap = true }),
-  --
-  --   vim.keymap.set('n', '<leader>tm', function()
-  --     vim.cmd('CopilotChatModels')
-  --   end, { silent = true, noremap = true })
-  -- },
   {
     {
       "sourcegraph/sg.nvim",
@@ -455,10 +405,8 @@ vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open float
 -- vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 
 -- My Remaps
-
 vim.keymap.set('n', '<leader>f', ':NvimTreeToggle<cr>', { desc = 'Toggle Filetree' })
--- vim.keymap.set('n', '<leader>pv', vim.cmd.Ex, { desc = '[P]roject [V]iew' }) commenting out while using nvim-tree
-
+vim.keymap.set('n', '<leader>cc', ':CodyChat<CR>', { noremap = true, silent = true, desc = 'Open Cody Chat' })
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
@@ -547,7 +495,7 @@ vim.keymap.set('n', '<C-p>', require('telescope.builtin').find_files, { desc = '
 vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
 vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
 vim.keymap.set('n', '<C-f>', require('telescope.builtin').live_grep, { desc = 'Search by Grep C-f' })
-vim.keymap.set('n', '<leader>sG', ':LiveGrepGitRoot<cr>', { desc = '[S]earch by [G]rep on Git Root' })
+-- vim.keymap.set('n', '<leader>sG', ':LiveGrepGitRoot<cr>', { desc = '[S]earch by [G]rep on Git Root' })
 vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
 vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = '[S]earch [R]esume' })
 -- Run vim-sleuth on command
