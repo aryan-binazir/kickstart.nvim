@@ -220,7 +220,6 @@ require('lazy').setup({
     },
   },
   -- Themes
-  -- { "catppuccin/nvim",        name = "catppuccin", priority = 1000 },
   {
     "folke/tokyonight.nvim",
     lazy = false,
@@ -328,9 +327,6 @@ require('lazy').setup({
 
 -- Set highlight on search
 vim.o.hlsearch = false
-
--- Set colourscheme Catppucin
--- vim.cmd.colorscheme "catppuccin"
 
 -- Set colourscheme tokyonight-night
 vim.cmd [[colorscheme tokyonight-night]]
@@ -495,7 +491,7 @@ vim.keymap.set('n', '<C-p>', require('telescope.builtin').find_files, { desc = '
 vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
 vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
 vim.keymap.set('n', '<C-f>', require('telescope.builtin').live_grep, { desc = 'Search by Grep C-f' })
--- vim.keymap.set('n', '<leader>sG', ':LiveGrepGitRoot<cr>', { desc = '[S]earch by [G]rep on Git Root' })
+vim.keymap.set('n', '<leader>sG', ':LiveGrepGitRoot<cr>', { desc = '[S]earch by [G]rep on Git Root' })
 vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
 vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = '[S]earch [R]esume' })
 -- Run vim-sleuth on command
