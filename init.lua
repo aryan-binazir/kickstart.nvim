@@ -403,6 +403,7 @@ vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open float
 -- My Remaps
 vim.keymap.set('n', '<leader>f', ':NvimTreeToggle<cr>', { desc = 'Toggle Filetree' })
 vim.keymap.set('n', '<leader>cc', ':CodyChat<CR>', { noremap = true, silent = true, desc = 'Open Cody Chat' })
+vim.keymap.set('n', '<leader>ct', ':CodyTask<CR>', { noremap = true, silent = true, desc = 'Open Cody Task' })
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
