@@ -233,8 +233,15 @@ require('lazy').setup({
   {
     {
       "sourcegraph/sg.nvim",
-      dependencies = { "nvim-lua/plenary.nvim" },
+      dependencies = {
+        "nvim-lua/plenary.nvim",
+        "stevearc/dressing.nvim",
+      },
     },
+  },
+  {
+    'stevearc/dressing.nvim',
+    opts = {},
   },
   {
     'windwp/nvim-autopairs',
