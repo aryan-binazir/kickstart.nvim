@@ -812,6 +812,15 @@ require("nvim-tree").setup({
   },
   renderer = {
     group_empty = true,
+    icons = {
+      show = {
+        file = false,
+        folder = false,
+        folder_arrow = false,
+        git = false,
+        modified = false
+      }
+    }
   },
   filters = {
     dotfiles = false,
