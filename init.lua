@@ -221,13 +221,19 @@ require('lazy').setup({
     branch = "harpoon2",
     dependencies = { "nvim-lua/plenary.nvim" }
   },
+  -- { "github/copilot.vim" },
   -- {
   --   {
-  --     "sourcegraph/sg.nvim",
+  --     "CopilotC-Nvim/CopilotChat.nvim",
   --     dependencies = {
-  --       "nvim-lua/plenary.nvim",
-  --       "stevearc/dressing.nvim",
+  --       { "github/copilot.vim" },
+  --       { "nvim-lua/plenary.nvim", branch = "master" }, -- for curl, log and async functions
   --     },
+  --     build = "make tiktoken",                          -- Only on MacOS or Linux
+  --     opts = {
+  --       -- See Configuration section for options
+  --     },
+  --     -- See Commands section for default commands if you want to lazy load on them
   --   },
   -- },
   {
@@ -419,14 +425,17 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 
 -- Other Remaps
 vim.keymap.set('n', '<leader>f', ':NvimTreeToggle<cr>', { desc = 'Toggle Filetree' })
-vim.keymap.set('n', '<leader>cc', ':CodyChat<CR>', { noremap = true, silent = true, desc = 'Open Cody Chat' })
-vim.keymap.set('n', '<leader>ct', ':CodyTask<CR>', { noremap = true, silent = true, desc = 'Open Cody Task' })
+vim.keymap.set('n', '<leader>cc', ':CopilotChatToggle<CR>', { noremap = true, silent = true, desc = 'Open Copilot Chat' })
+vim.keymap.set('n', '<leader>cr', ':CopilotChatReset<CR>', { noremap = true, silent = true, desc = 'Reset Copilot Chat' })
+vim.keymap.set('n', '<leader>cm', ':CopilotChatModels<CR>',
+  { noremap = true, silent = true, desc = 'Change Copilot Model' })
 vim.keymap.set('n', '<leader>tt', Toggle_diagnostics, { noremap = true, silent = true, desc = "Toggle vim diagnostics" })
 vim.keymap.set('n', '<leader>tr', ':set relativenumber!<CR>',
   { noremap = true, silent = true, desc = "Toggle relative number" })
 vim.api.nvim_set_keymap('n', '<leader>l8', ':!autopep8 --in-place -a -a -a -a --max-line-length 79 %<CR>',
   { noremap = true, silent = true, desc = "Auto Pep 8 Formatting" })
 vim.keymap.set('n', '<leader>sl', function() vim.cmd("Sleuth") end, { desc = '[SL]euth' })
+vim.api.nvim_set_keymap("i", "<C-s>", 'copilot#Accept("<CR>")', { silent = true, expr = true })
 
 
 -- [[ Highlight on yank ]]
@@ -736,11 +745,9 @@ local luasnip = require 'luasnip'
 require('luasnip.loaders.from_vscode').lazy_load()
 luasnip.config.setup {}
 
--- require("sg").setup({
---   enable_cody = true,
---   event = "InsertEnter",
---   auth_strategy = "environment-variables",
--- })
+-- require("CopilotChat").setup {
+--   model = 'claude-3.5-sonnet',
+-- }
 
 cmp.setup {
   snippet = {
@@ -781,7 +788,6 @@ cmp.setup {
     end, { 'i', 's' }),
   },
   sources = {
-    -- { name = "cody" },
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
     { name = 'path' },
