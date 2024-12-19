@@ -267,7 +267,10 @@ require('lazy').setup({
   },
 
   -- "gc" to comment visual regions/lines
-  { 'numToStr/Comment.nvim', opts = {} },
+  {
+    'numToStr/Comment.nvim',
+    opts = {}
+  },
 
   -- Fuzzy Finder (files, lsp, etc)
   {
@@ -317,6 +320,7 @@ require('lazy').setup({
     'nvim-treesitter/nvim-treesitter-context',
     requires = { 'nvim-treesitter/nvim-treesitter' }
   },
+  { 'nvim-telescope/telescope-ui-select.nvim' },
 
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.
@@ -463,14 +467,21 @@ require('telescope').setup {
         ['<C-d>'] = false,
       },
     },
-    layout_config = {
-      horizontal = { width = 0.99, height = 0.99 }
+    -- layout_config = {
+    --   horizontal = { width = 0.99, height = 0.99 }
+    -- },
+    pickers = {},
+    extensions = {
+      ['ui-select'] = {
+        require('telescope.themes').get_dropdown(),
+      },
     },
   },
 }
 
 -- Enable telescope fzf native, if installed
 pcall(require('telescope').load_extension, 'fzf')
+pcall(require('telescope').load_extension, 'ui-select')
 
 -- Telescope live_grep in git root
 -- Function to find the git root directory based on the current buffer's path
