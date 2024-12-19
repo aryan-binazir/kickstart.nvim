@@ -436,6 +436,11 @@ vim.api.nvim_set_keymap('n', '<leader>l8', ':!autopep8 --in-place -a -a -a -a --
   { noremap = true, silent = true, desc = "Auto Pep 8 Formatting" })
 vim.keymap.set('n', '<leader>sl', function() vim.cmd("Sleuth") end, { desc = '[SL]euth' })
 vim.api.nvim_set_keymap("i", "<C-s>", 'copilot#Accept("<CR>")', { silent = true, expr = true })
+vim.api.nvim_set_keymap("i", "<C-h>", '<Plug>(copilot-next)', { silent = true })     -- Next suggestion
+vim.api.nvim_set_keymap("i", "<C-l>", '<Plug>(copilot-previous)', { silent = true }) -- Previous suggestion
+vim.api.nvim_set_keymap("i", "<C-\\>", '<Plug>(copilot-dismiss)', { silent = true }) -- Dismiss suggestion
+
+vim.api.nvim_set_keymap("i", "<C-s>", 'copilot#Accept("<CR>")', { silent = true, expr = true })
 
 
 -- [[ Highlight on yank ]]
