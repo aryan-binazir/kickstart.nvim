@@ -1,14 +1,6 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
--- disable netrw at the very start of your init.lua
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
-
--- set termguicolors to enable highlight groups
-vim.opt.termguicolors = true
-vim.g.have_nerd_font = false
-
 -- create key mapping to toggle diagnostics (lsp) on and off
 vim.g["diagnostics_active"] = true
 function Toggle_diagnostics()
@@ -99,7 +91,14 @@ require('lazy').setup({
       })
     end
   },
-  { 'nvim-tree/nvim-tree.lua' },
+  {
+    'stevearc/oil.nvim',
+    ---@module 'oil'
+    ---@type oil.SetupOpts
+    opts = {},
+    -- Optional dependencies
+    dependencies = { { "echasnovski/mini.icons", opts = {} } },
+  },
   {
     -- Autocompletion
     'hrsh7th/nvim-cmp',
@@ -268,7 +267,7 @@ require('lazy').setup({
   },
 
   -- "gc" to comment visual regions/lines
-  { 'numToStr/Comment.nvim',  opts = {} },
+  { 'numToStr/Comment.nvim', opts = {} },
 
   -- Fuzzy Finder (files, lsp, etc)
   {
@@ -420,11 +419,11 @@ vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = tr
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
--- vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
+vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 
 -- Other Remaps
-vim.keymap.set('n', '<leader>f', ':NvimTreeToggle<cr>', { desc = 'Toggle Filetree' })
+vim.keymap.set('n', '<leader>f', ':Oil --float<CR>', { desc = 'Open Oil Float' })
 vim.keymap.set('n', '<leader>cc', ':CopilotChatToggle<CR>', { noremap = true, silent = true, desc = 'Open Copilot Chat' })
 vim.keymap.set('n', '<leader>cr', ':CopilotChatReset<CR>', { noremap = true, silent = true, desc = 'Reset Copilot Chat' })
 vim.keymap.set('n', '<leader>cm', ':CopilotChatModels<CR>',
@@ -463,6 +462,9 @@ require('telescope').setup {
         ['<C-u>'] = false,
         ['<C-d>'] = false,
       },
+    },
+    layout_config = {
+      horizontal = { width = 0.99, height = 0.99 }
     },
   },
 }
@@ -628,6 +630,8 @@ require 'treesitter-context'.setup {
   zindex = 20,
   on_attach = nil,
 }
+
+require("oil").setup()
 
 -- Configure Harpoon
 local harpoon = require("harpoon")
@@ -798,44 +802,4 @@ cmp.setup {
     { name = 'path' },
   },
 }
-local function my_on_attach(bufnr)
-  local api = require "nvim-tree.api"
-
-  local function opts(desc)
-    return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
-  end
-
-  -- default mappings
-  api.config.mappings.default_on_attach(bufnr)
-
-  -- custom mappings
-  vim.keymap.set('n', '<C-t>', api.tree.change_root_to_parent, opts('Up'))
-  vim.keymap.set('n', '?', api.tree.toggle_help, opts('Help'))
-end
-
-require("nvim-tree").setup({
-  on_attach = my_on_attach,
-  sort = {
-    sorter = "case_sensitive",
-  },
-  view = {
-    width = 30,
-  },
-  renderer = {
-    group_empty = true,
-    icons = {
-      show = {
-        file = false,
-        folder = false,
-        folder_arrow = false,
-        git = false,
-        modified = false
-      }
-    }
-  },
-  filters = {
-    dotfiles = false,
-  },
-})
-
 -- The line beneath this is called `modeline`. See `:help modeline`
