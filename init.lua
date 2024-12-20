@@ -284,16 +284,6 @@ require('lazy').setup({
       "debugloop/telescope-undo.nvim",
       { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
       config = function()
-        require("telescope").setup({
-          -- the rest of your telescope config goes here
-          extensions = {
-            undo = {
-              -- telescope-undo.nvim config, see below
-            },
-            -- other extensions:
-            -- file_browser = { ... }
-          },
-        })
         require("telescope").load_extension("undo")
       end,
       {
@@ -465,17 +455,29 @@ require('telescope').setup {
       i = {
         ['<C-u>'] = false,
         ['<C-d>'] = false,
+        ['<C-p>'] = require('telescope.actions.layout').toggle_preview
       },
     },
-    -- layout_config = {
-    --   horizontal = { width = 0.99, height = 0.99 }
-    -- },
+    layout_config = {
+      horizontal = {
+        width = 0.99,
+        height = 0.99,
+        preview_cutoff = 0,
+        preview_width = 0.6,
+      }
+    },
     pickers = {},
     extensions = {
       ['ui-select'] = {
         require('telescope.themes').get_dropdown(),
       },
+      undo = {
+        -- telescope-undo.nvim config, see below
+      },
     },
+    preview = {
+      hide_on_startup = true
+    }
   },
 }
 
