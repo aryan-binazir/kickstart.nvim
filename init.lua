@@ -57,7 +57,8 @@ require('lazy').setup({
     -- setting the keybinding for LazyGit with 'keys' is recommended in
     -- order to load the plugin when the command is run for the first time
     keys = {
-      { "<leader>lg", "<cmd>LazyGit<cr>", desc = "LazyGit" }
+      { "<leader>lg", "<cmd>LazyGit<cr>",            desc = "LazyGit" },
+      { "<leader>lc", "<cmd>LazyGitCurrentFile<cr>", desc = "LazyGit Current File" }
     }
   },
 
@@ -220,21 +221,21 @@ require('lazy').setup({
     branch = "harpoon2",
     dependencies = { "nvim-lua/plenary.nvim" }
   },
-  -- { "github/copilot.vim" },
-  -- {
-  --   {
-  --     "CopilotC-Nvim/CopilotChat.nvim",
-  --     dependencies = {
-  --       { "github/copilot.vim" },
-  --       { "nvim-lua/plenary.nvim", branch = "master" }, -- for curl, log and async functions
-  --     },
-  --     build = "make tiktoken",                          -- Only on MacOS or Linux
-  --     opts = {
-  --       -- See Configuration section for options
-  --     },
-  --     -- See Commands section for default commands if you want to lazy load on them
-  --   },
-  -- },
+  { "github/copilot.vim" },
+  {
+    {
+      "CopilotC-Nvim/CopilotChat.nvim",
+      dependencies = {
+        { "github/copilot.vim" },
+        { "nvim-lua/plenary.nvim", branch = "master" }, -- for curl, log and async functions
+      },
+      build = "make tiktoken",                          -- Only on MacOS or Linux
+      opts = {
+        -- See Configuration section for options
+      },
+      -- See Commands section for default commands if you want to lazy load on them
+    },
+  },
   {
     'stevearc/dressing.nvim',
     opts = {},
@@ -432,9 +433,6 @@ vim.api.nvim_set_keymap("i", "<C-s>", 'copilot#Accept("<CR>")', { silent = true,
 vim.api.nvim_set_keymap("i", "<C-h>", '<Plug>(copilot-next)', { silent = true })     -- Next suggestion
 vim.api.nvim_set_keymap("i", "<C-l>", '<Plug>(copilot-previous)', { silent = true }) -- Previous suggestion
 vim.api.nvim_set_keymap("i", "<C-\\>", '<Plug>(copilot-dismiss)', { silent = true }) -- Dismiss suggestion
-
-vim.api.nvim_set_keymap("i", "<C-s>", 'copilot#Accept("<CR>")', { silent = true, expr = true })
-
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
@@ -780,9 +778,9 @@ local luasnip = require 'luasnip'
 require('luasnip.loaders.from_vscode').lazy_load()
 luasnip.config.setup {}
 
--- require("CopilotChat").setup {
---   model = 'claude-3.5-sonnet',
--- }
+require("CopilotChat").setup {
+  model = 'claude-3.5-sonnet',
+}
 
 cmp.setup {
   snippet = {
